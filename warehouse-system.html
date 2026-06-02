@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>نظام إدارة المخزن الذكي</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -499,10 +499,178 @@
   ::-webkit-scrollbar-track { background:transparent; }
   ::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
 
+
+  /* ═══════════════════════════════════════
+     TABLET  (≤ 900px)
+  ═══════════════════════════════════════ */
   @media(max-width:900px){
-    .stats-grid{ grid-template-columns:repeat(2,1fr); }
-    .form-grid{ grid-template-columns:repeat(2,1fr); }
-    .backup-grid{ grid-template-columns:1fr; }
+    .stats-grid        { grid-template-columns:repeat(2,1fr); }
+    .form-grid         { grid-template-columns:repeat(2,1fr); }
+    .backup-grid       { grid-template-columns:1fr; }
+    .sidebar           { width:180px; }
+  }
+
+  /* ═══════════════════════════════════════
+     MOBILE  (≤ 640px)
+  ═══════════════════════════════════════ */
+  @media(max-width:640px){
+
+    /* ── Header ── */
+    .header {
+      height:56px;
+      padding:0 12px;
+    }
+    .logo { font-size:14px; gap:8px; }
+    .logo-icon { width:30px; height:30px; font-size:15px; }
+    .logo-text { display:none; }          /* hide text, keep icon */
+    .backup-status { display:none; }      /* hide on mobile */
+    .theme-wrap { padding:3px 8px; gap:5px; }
+    .theme-label { display:none; }
+    .btn-sm { padding:6px 10px; font-size:12px; }
+    .header-actions { gap:6px; }
+
+    /* ── Layout: sidebar becomes bottom tab bar ── */
+    .app {
+      flex-direction: column-reverse;
+      height: calc(100vh - 56px);
+    }
+
+    .sidebar {
+      width:100%;
+      height:60px;
+      flex-direction:row;
+      overflow-x:auto;
+      overflow-y:hidden;
+      padding:0;
+      border-left:none;
+      border-top:1px solid var(--border);
+      align-items:stretch;
+      flex-shrink:0;
+      scrollbar-width:none;
+      -webkit-overflow-scrolling:touch;
+    }
+    .sidebar::-webkit-scrollbar { display:none; }
+
+    .nav-section { display:none; }
+    .nav-item {
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:2px;
+      padding:6px 14px;
+      border-right:none;
+      border-top:3px solid transparent;
+      border-bottom:none;
+      flex-shrink:0;
+      font-size:10px;
+      min-width:64px;
+      white-space:nowrap;
+    }
+    .nav-item.active {
+      border-right:none;
+      border-top-color:var(--accent);
+    }
+    .nav-icon { font-size:20px; }
+    .badge { margin-right:0; margin-top:-4px; font-size:9px; padding:1px 5px; }
+
+    /* ── Main ── */
+    .main { padding:14px 12px; overflow-y:auto; flex:1; }
+
+    /* ── Page header ── */
+    .page-header { flex-direction:column; align-items:flex-start; gap:10px; margin-bottom:16px; }
+    .page-title  { font-size:18px; }
+    .page-subtitle { font-size:12px; }
+
+    /* ── Stats grid ── */
+    .stats-grid { grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:16px; }
+    .stat-card  { padding:12px; }
+    .stat-value { font-size:22px; }
+    .stat-label { font-size:10px; }
+
+    /* ── Form card ── */
+    .form-card  { padding:14px 12px; }
+    .form-title { font-size:13px; }
+    .form-grid, .form-grid-3 {
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .form-group.span2 { grid-column:span 2; }
+    label { font-size:11px; }
+    input, select, textarea { font-size:13px; padding:8px 10px; }
+
+    /* ── Items table: make it scroll ── */
+    .items-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .items-table      { min-width:520px; font-size:12px; }
+    .items-table th, .items-table td { padding:7px 8px; }
+    .items-table input { width:80px !important; }
+    .storenum-input   { width:90px !important; }
+    .name-input       { width:130px !important; }
+
+    /* ── Form footer ── */
+    .form-footer      { flex-direction:column; gap:12px; align-items:stretch; }
+    .grand-total      { justify-content:center; }
+    .grand-total-value { font-size:18px; }
+    .form-actions     { display:flex; gap:8px; justify-content:flex-end; }
+
+    /* ── Records card ── */
+    .records-card     { border-radius:10px; }
+    .records-header   { padding:12px; flex-direction:column; align-items:flex-start; gap:8px; }
+    .search-box input { width:140px; }
+    .table-wrap       { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    table             { min-width:560px; font-size:12px; }
+    thead th          { padding:9px 10px; font-size:10px; }
+    tbody td          { padding:9px 10px; }
+    .chip             { font-size:10px; }
+    .doc-num          { font-size:11px; }
+    .action-btns      { flex-direction:column; gap:4px; }
+    .action-btns .btn { padding:4px 8px; font-size:11px; }
+
+    /* ── Section header ── */
+    .section-header   { flex-direction:column; align-items:flex-start; gap:8px; margin-bottom:12px; }
+    .section-title    { font-size:14px; }
+
+    /* ── Tabs ── */
+    .tabs { flex-wrap:wrap; }
+    .tab  { font-size:12px; padding:6px 12px; }
+
+    /* ── Inventory grid ── */
+    #inv-cards { grid-template-columns:1fr !important; }
+
+    /* ── Analytics KPI grid ── */
+    #an-kpis                { grid-template-columns:repeat(2,1fr) !important; }
+    #an-detail-kpis         { grid-template-columns:repeat(2,1fr) !important; }
+
+    /* ── Backup grid ── */
+    .backup-grid { grid-template-columns:1fr; }
+    .storage-info { grid-template-columns:repeat(3,1fr); }
+
+    /* ── Buttons ── */
+    .btn { font-size:12px; padding:8px 12px; }
+
+    /* ── Image previews ── */
+    .img-thumb { width:70px; height:70px; }
+
+    /* ── Edit modal ── */
+    #inv-edit-modal > div { padding:18px 14px; }
+
+    /* ── Report filters ── */
+    #page-daily .form-grid,
+    #page-stocktake .form-grid,
+    #page-movement .form-grid,
+    #page-analytics .form-grid { grid-template-columns:1fr !important; }
+
+    /* ── Query page ── */
+    #page-query .form-card > div { flex-direction:column; }
+    #qry_wh { width:100% !important; }
+    #qry_term { font-size:14px !important; }
+
+    /* ── Movement summary cards ── */
+    #mov-summary { grid-template-columns:repeat(2,1fr) !important; }
+
+    /* ── Autocomplete dropdown wider on mobile ── */
+    .ac-portal { min-width:260px !important; font-size:13px; }
+    .ac-item   { padding:10px 12px; }
+    .ac-code   { min-width:50px; }
   }
 </style>
 </head>
@@ -512,7 +680,7 @@
 <header class="header">
   <div class="logo">
     <div class="logo-icon">📦</div>
-    نظام إدارة المخزن الذكي
+    <span class="logo-text">نظام إدارة المخزن الذكي</span>
   </div>
   <div class="header-actions">
     <div class="backup-status">
@@ -2937,7 +3105,54 @@ function printReport(divId) {
   w.document.close();
   w.print();
 }
+
+// ══════════════════════════════════════════
+//  MOBILE UX
+// ══════════════════════════════════════════
+
+// Close any open ac-portal when tapping outside
+document.addEventListener('touchstart', e => {
+  if (!e.target.closest('.ac-wrap')) {
+    document.querySelectorAll('.ac-portal').forEach(p => p.style.display='none');
+  }
+});
+
+// Scroll active nav item into view on mobile
+function scrollNavActive() {
+  const active = document.querySelector('.nav-item.active');
+  if (active) active.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+}
+
+// Patch showPage to also scroll nav
+const _mobileShowPage = showPage;
+function showPage(name) {
+  _mobileShowPage.call(this, name);
+  setTimeout(scrollNavActive, 50);
+}
+
+// Improve mobile touch: tap on stat-card / form-card ripple
+document.addEventListener('click', e => {
+  const card = e.target.closest('.stat-card, .nav-item');
+  if (!card) return;
+  const r = document.createElement('span');
+  const d = Math.max(card.offsetWidth, card.offsetHeight);
+  const rect = card.getBoundingClientRect();
+  r.style.cssText = `position:absolute;border-radius:50%;background:rgba(0,212,255,0.2);
+    width:${d}px;height:${d}px;top:${e.clientY-rect.top-d/2}px;left:${e.clientX-rect.left-d/2}px;
+    pointer-events:none;animation:ripple .5s linear;`;
+  card.style.position = 'relative';
+  card.style.overflow = 'hidden';
+  card.appendChild(r);
+  setTimeout(()=>r.remove(), 500);
+});
 </script>
+
+<style>
+@keyframes ripple {
+  from { transform:scale(0); opacity:1; }
+  to   { transform:scale(2.5); opacity:0; }
+}
+</style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
