@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رَصَد | دليل ومرصد الأنواع الغازية في مياه العراق</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">🌾 مرصد الأهوار والأنهار العراقية</span>
+    <h1 class="display">رَصَد<br>دليل الأنواع الغازية في مياه العراق</h1>
+    <p class="lead">تعرّف على الأنواع الدخيلة والغازية في دجلة والفرات والأهوار، تتبّع مواقع رصدها على الخريطة، وتعلّم طرق المكافحة السليمة بيئياً — بمساهمة المجتمع المحلي.</p>
+  </div>
+  <svg class="reeds" viewBox="0 0 1200 110" preserveAspectRatio="none">
+    <path d="M0,110 L0,60 Q100,30 200,60 T400,55 T600,65 T800,50 T1000,60 T1200,55 L1200,110 Z" fill="#0f3a37" opacity="0.9"/>
+    <g stroke="#c9a227" stroke-width="2" opacity="0.35" stroke-linecap="round">
+      <path d="M120,110 L110,55"/><path d="M140,110 L150,50"/><path d="M300,110 L292,58"/>
+      <path d="M480,110 L470,48"/><path d="M700,110 L710,52"/><path d="M900,110 L892,45"/>
+      <path d="M1050,110 L1060,55"/><path d="M60,110 L55,68"/>
+    </g>
+  </svg>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="species">الأنواع الغازية</div>
+  <div class="tab" data-tab="map">خريطة الرصد والبلاغات</div>
+  <div class="tab" data-tab="idcheck">تحديد النوع بالصورة</div>
+  <div class="tab" data-tab="control">طرق المكافحة</div>
+  <div class="tab" data-tab="creators">مبدعو محتوى ومصادر</div>
+</div>
+
+<main>
+
+  <!-- SPECIES -->
+  <section class="view active" id="view-species">
+    <div class="section-head">
+      <h2>الأنواع الغازية والدخيلة الموثّقة</h2>
+      <p>أربعة أنواع رئيسية موثّقة في مصادر بيئية وأكاديمية عراقية — اضغط على أي بطاقة لعرض التفاصيل الكاملة.</p>
+    </div>
+    <div id="species-grid" class="grid"></div>
+    <div id="species-detail" style="display:none;"></div>
+  </section>
+
+  <!-- MAP -->
+  <section class="view" id="view-map">
+    <div class="section-head">
+      <h2>خريطة الرصد والبلاغات</h2>
+      <p>نقاط موثّقة من مصادر بيئية (دوائر ثابتة)، بالإضافة إلى بلاغات المجتمع المحلي (دوائر يضيفها المستخدمون). بلاغاتك تُخزَّن وتظهر لجميع مستخدمي هذا الدليل.</p>
+    </div>
+    <div id="map"></div>
+    <div class="map-legend">
+      <span><span class="dot" style="background:#c9a227"></span> رصد موثّق (مصدر بيئي/بحثي)</span>
+      <span><span class="dot" style="background:#4fb0a5"></span> بلاغ من المجتمع المحلي</span>
+    </div>
+
+    <div class="report-form">
+      <h3 style="margin:0;color:var(--parchment);font-size:17px;">أضف بلاغ رصد جديد</h3>
+      <p class="hint">اضغط على الخريطة أعلاه لتحديد الموقع، أو أدخل الإحداثيات يدوياً. أرفق صورة إن توفرت. هذه معلومة عامة يشاهدها كل من يفتح هذا الدليل.</p>
+      <div id="pick-note" class="pick-note">لم يتم تحديد موقع بعد — اضغط على الخريطة أو أدخل الإحداثيات.</div>
+
+      <label>الإحداثيات (خط العرض / خط الطول)</label>
+      <div class="coord-row">
+        <input id="rp-lat" type="number" step="0.00001" placeholder="خط العرض Latitude">
+        <input id="rp-lng" type="number" step="0.00001" placeholder="خط الطول Longitude">
+      </div>
+
+      <label>نوع الكائن الغازي</label>
+      <select id="rp-species">
+        <option value="">اختر النوع...</option>
+      </select>
+
+      <label>اسم المنطقة (مثال: هور الحويزة، ضفاف دجلة قرب...)</label>
+      <input id="rp-place" type="text" placeholder="اسم المنطقة أو أقرب علامة مميزة">
+
+      <label>صورة الكائن المرصود (اختياري)</label>
+      <div class="photo-attach" id="rp-photo-attach">
+        <span id="rp-photo-label">📷 اضغط لإرفاق صورة</span>
+        <input type="file" id="rp-photo-input" accept="image/*" style="display:none;">
+        <img id="rp-photo-preview" style="display:none;">
+      </div>
+
+      <label>ملاحظات إضافية (اختياري)</label>
+      <textarea id="rp-notes" placeholder="عدد تقريبي، تاريخ الرصد، تفاصيل أخرى..."></textarea>
+
+      <button class="btn" id="rp-submit" disabled>إضافة البلاغ</button>
+    </div>
+
+    <div id="reports-list" class="reports-list"></div>
+  </section>
+
+  <!-- PHOTO ID -->
+  <section class="view" id="view-idcheck">
+    <div class="section-head">
+      <h2>تحديد النوع بالصورة (بالذكاء الاصطناعي)</h2>
+      <p>ارفع صورة واضحة لسمكة أو نبات مائي مشتبه به، وسيقارنها النظام بخصائص الأنواع الغازية الموثّقة في هذا الدليل ويقترح إجراءً مناسباً. هذا تحديد استرشادي وليس بديلاً عن تأكيد مختص.</p>
+    </div>
+    <div class="id-panel">
+      <div class="drop" id="drop-zone">
+        <div id="drop-placeholder">📷 اضغط هنا لاختيار صورة، أو اسحبها وأفلتها</div>
+        <input type="file" id="file-input" accept="image/*" style="display:none;">
+        <img id="preview-img" style="display:none;">
+      </div>
+      <button class="btn" id="analyze-btn" style="display:none;margin-top:16px;">تحليل الصورة</button>
+      <div id="id-result" style="display:none;" class="id-result"></div>
+    </div>
+  </section>
+
+  <!-- CONTROL -->
+  <section class="view" id="view-control">
+    <div class="section-head">
+      <h2>طرق المكافحة والسيطرة الآمنة بيئياً</h2>
+      <p>مبادئ عامة معتمدة عالمياً للسيطرة على الأنواع الغازية المائية، قابلة للتطبيق في البيئة العراقية.</p>
+    </div>
+    <div class="method-grid">
+      <div class="method-card"><h4>🎣 الصيد والإزالة اليدوية</h4><p>الصيد المنتظم بالشباك أو الصنارة من أكثر الطرق فعالية للأسماك الغازية مثل السلور الأفريقي والبلطي. لا تُعِد أي فرد حي مصطاد إلى الماء مهما كان حجمه.</p></div>
+      <div class="method-card"><h4>🚫 منع إعادة الإطلاق</h4><p>لا تُطلق أبداً أسماكاً غازية اصطدتها في مسطح مائي آخر، ولا تستخدمها كطُعم حي — هذه من أهم أسباب انتشار الأنواع الدخيلة أصلاً.</p></div>
+      <div class="method-card"><h4>🌿 الإزالة اليدوية للنباتات</h4><p>نباتات مثل زهرة النيل والهايدريلا تُزال يدوياً أو بمعدات بسيطة من جذورها قبل موسم الإزهار، ويُتخلص من الكتلة النباتية بعيداً عن مجرى الماء لمنع تحللها وتقليل الأكسجين.</p></div>
+      <div class="method-card"><h4>📣 الإبلاغ الرسمي</h4><p>أبلغ دوائر البيئة والزراعة المحلية وهيئة الأهوار عند رصد أعداد كبيرة، خاصة في مناطق جديدة لم تُسجَّل فيها الأنواع الغازية سابقاً — هذا يساعد على رسم خريطة انتشار دقيقة والتدخل المبكر.</p></div>
+      <div class="method-card"><h4>🍽️ الاستفادة الغذائية</h4><p>بعض الأنواع كالسلور الأفريقي والبلطي صالحة للأكل ويمكن تشجيع صيدها التجاري كحافز اقتصادي لتقليل أعدادها، بعد التأكد من جودة المياه ومصدرها.</p></div>
+      <div class="method-card"><h4>🧪 المعالجات المتخصصة</h4><p>أي تدخل كيميائي (مبيدات نباتية أو مواد مائية) يجب أن يتم حصراً عبر جهات مختصة مرخصة، لتفادي الإضرار بالأنواع المحلية ومصادر مياه الشرب.</p></div>
+    </div>
+    <div class="warn">
+      <b>تنبيه مهم:</b> لا تستخدم أبداً السموم أو المواد الكيميائية أو أي وسيلة غير مرخصة لقتل الأسماك بشكل جماعي في مسطحات مائية عامة — هذا يضر بالأنواع المحلية والمياه ومصادر الشرب وقد يكون مخالفاً للقانون. السيطرة الفعالة تعتمد على الصيد المنتظم والإبلاغ والتنسيق مع الجهات البيئية الرسمية.
+    </div>
+  </section>
+
+  <!-- CREATORS & SOURCES -->
+  <section class="view" id="view-creators">
+    <div class="section-head">
+      <h2>مبدعو محتوى وخبراء موثوقون</h2>
+      <p>هذا الدليل يعتمد جزئياً على أبحاث ومحتوى صانعي محتوى ومختصين عراقيين حقيقيين يوثّقون الحياة البرية والمائية في العراق بالصور والفيديو.</p>
+    </div>
+    <div id="creators-grid" class="grid creators-grid"></div>
+
+    <div class="video-note">
+      🎬 لا يوجد بث تلقائي: إنستغرام لا يسمح لأي موقع خارجي بمراقبة حساب ونشر فيديوهاته الجديدة تلقائياً. لكن أي شخص يفتح هذا الدليل يقدر يضيف رابط فيديو جديد بنفسه بالأسفل، ويبقى محفوظاً للجميع بعده.
+    </div>
+
+    <div class="block-title">أضف فيديو جديد للمعرض</div>
+    <div class="report-form">
+      <label>رابط المنشور (Reel أو Post من إنستغرام)</label>
+      <input id="vid-url" type="text" placeholder="https://www.instagram.com/reel/...">
+      <label>من صاحب الحساب؟</label>
+      <select id="vid-creator">
+        <option value="">اختر (اختياري)...</option>
+      </select>
+      <label>وصف مختصر (اختياري)</label>
+      <input id="vid-caption" type="text" placeholder="مثال: فيديو عن السلور الأفريقي في هور الحويزة">
+      <button class="btn" id="vid-submit" disabled>إضافة الفيديو</button>
+      <p class="hint" id="vid-hint"></p>
+    </div>
+
+    <div id="video-gallery" class="video-gallery"></div>
+
+    <div class="block-title">مراجع علمية وإخبارية موثّقة</div>
+    <ul class="clean" id="references-list"></ul>
+  </section>
+
+</main>
+
+<footer>دليل مرجعي وتثقيفي — للإبلاغات الرسمية يُرجى مراجعة دائرة البيئة أو هيئة مساحة الأهوار في محافظتك.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script async src="//www.instagram.com/embed.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
