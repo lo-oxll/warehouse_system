@@ -14,7 +14,7 @@ window.SUPABASE_ANON_KEY = 'YOUR-ANON-PUBLIC-KEY';
 // الباقة المجانية تكفي لموقع صغير/متوسط الاستخدام بدون أي تكلفة.
 // نصيحة أمان: من نفس الصفحة اضغط على المفتاح > Restrict key، واختر
 // "Websites" وحط دومين موقعك (مثل *.github.io/*) حتى ما يُستخدم مفتاحك من مواقع ثانية.
-window.GEMINI_API_KEY = 'AQ.Ab8RN6KUdpxMD7l4MU1eeri8vnpwYIVSA6E4c2wlHqtaiOsDvA';
+window.GEMINI_API_KEY = 'AQ.Ab8RN6J2ASs3ieRMCx8VxVm1bSRpGUTstExWnOXQYoTqGRdJg';
 
 // ============================================================
 // خيار بديل مدفوع (اختياري): Anthropic عبر دالة وسيطة على Supabase
