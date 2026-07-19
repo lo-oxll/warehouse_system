@@ -9,7 +9,7 @@ const SPECIES = [
     image:'https://commons.wikimedia.org/wiki/Special:FilePath/Ikan_lele_dumbo_(4).JPG?width=800',
     imageCredit:'Wagino 20100516 — Wikimedia Commons (CC BY-SA 3.0)',
     lookalike:{name:'الجري العراقي (سمك الشلك)', latin:'Silurus triostegus',
-      image:'https://commons.wikimedia.org/wiki/Special:FilePath/Silurus_triostegus.jpg?width=500',
+
       imageCredit:'Wikimedia Commons',
       howToTell:'الجري المحلي جسمه أكثر انسيابياً وأملس بدون زعنفة ظهرية بارزة، وله شاربان طويلان فقط (وليس أربعة أزواج كاملة). السلور الأفريقي يتميز بزعنفة ظهرية طويلة تمتد على كامل الجسم تقريباً، وأربعة أزواج شوارب واضحة حول الفم.'},
     source:{label:'تقرير: الجزيرة نت — "سمك دخيل يهدد التنوع البيئي بالعراق"', creator:0},
