@@ -399,8 +399,12 @@ async function callAI(prompt, imageBase64, imageMediaType){
   if(window.GEMINI_API_KEY){
     const parts = [{ text: prompt }];
     if(imageBase64) parts.unshift({ inline_data: { mime_type: imageMediaType || 'image/jpeg', data: imageBase64 } });
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${window.GEMINI_API_KEY}`, {
-      method:'POST', headers:{'Content-Type':'application/json'},
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent`, {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'X-goog-api-key': window.GEMINI_API_KEY
+      },
       body: JSON.stringify({ contents:[{ parts }] })
     });
     const data = await res.json();
