@@ -3,8 +3,8 @@
 // ============================================================
 
 // من لوحة تحكم Supabase: Project Settings > API
-window.SUPABASE_URL = 'https://YOUR-PROJECT-REF.supabase.co';
-window.SUPABASE_ANON_KEY = 'YOUR-ANON-PUBLIC-KEY';
+window.SUPABASE_URL = 'https://hhdrueykwlbstcbqkwqh.supabase.co';
+window.SUPABASE_ANON_KEY = 'sb_publishable_fAgA6_utUUJYDX-BG81AXg_j-yEeDaP';
 
 // ============================================================
 // خيار مجاني (موصى به): Google Gemini
@@ -22,3 +22,4 @@ window.GEMINI_API_KEY = 'AQ.Ab8RN6J2ASs3ieRMCx8VxVm1bSRpGUTstExWnOXQYoTqGRdJg';
 // إذا تركت GEMINI_API_KEY فارغاً وتريد استخدام Claude بدلاً منه، انشر
 // الدالة الموجودة بمجلد supabase-edge-function وحط رابطها هنا:
 window.AI_PROXY_URL = '';
+
