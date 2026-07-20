@@ -22,4 +22,3 @@ window.GEMINI_API_KEY = 'AQ.Ab8RN6J2ASs3ieRMCx8VxVm1bSRpGUTstExWnOXQYoTqGRdJg';
 // إذا تركت GEMINI_API_KEY فارغاً وتريد استخدام Claude بدلاً منه، انشر
 // الدالة الموجودة بمجلد supabase-edge-function وحط رابطها هنا:
 window.AI_PROXY_URL = '';
-
